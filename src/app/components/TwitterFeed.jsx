@@ -7,8 +7,12 @@ const TwitterFeed = () => {
   const API_URL = 'http://magiclab-twitter-interview.herokuapp.com/piotr-lewandowski/api';
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios(`${API_URL}`);
-      setData(result.data);
+      try {
+        const result = await axios(`${API_URL}`);
+        setData(result.data);
+      } catch (error) {
+        console.error('Error:', error.message);
+      }
     };
 
     fetchData();
