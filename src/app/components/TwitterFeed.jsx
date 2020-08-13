@@ -1,22 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
+import { useInterval } from '../hooks/useInterval';
+
 const TwitterFeed = () => {
+  /** CONSTANTS */
+  const API_URL = 'http://magiclab-twitter-interview.herokuapp.com/piotr-lewandowski';
+
+  /** STATE */
   const [data, setData] = useState([]);
 
-  const API_URL = 'http://magiclab-twitter-interview.herokuapp.com/piotr-lewandowski/api';
-  useEffect(() => {
+  useInterval(() => {
     const fetchData = async () => {
       try {
-        const result = await axios(`${API_URL}`);
-        setData(result.data);
+        const response = await axios(`${API_URL}/api`);
+
+        setData(response.data);
       } catch (error) {
         console.error('Error:', error.message);
       }
     };
 
     fetchData();
-  }, []);
+  });
 
   return (
     <>
