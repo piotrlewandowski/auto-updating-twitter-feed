@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Container, Jumbotron, Card, Row, Col, Figure } from 'react-bootstrap';
 
 import { useInterval } from '../hooks/useInterval';
 
@@ -28,18 +29,39 @@ const TwitterFeed = () => {
   });
 
   return (
-    <>
-      <h1>Your feed</h1>
+    <Container>
+      <Jumbotron>
+        <h1>Auto updating Twitter feed</h1>
+      </Jumbotron>
       {data.length > 0 && (
-        <ul>
+        <>
           {data.map(tweet => (
-            <li key={tweet.id}>
-              {tweet.text}
-            </li>
+            <Card
+              key={tweet.id}
+              border="primary"
+              className="mb-2"
+            >
+              <Card.Body>
+                <Row>
+                  <Col md="auto">
+                    <Figure>
+                      <Figure.Image
+                        alt={tweet.username}
+                        src={tweet.image}
+                      />
+                    </Figure>
+                  </Col>
+                  <Col>
+                    <Card.Title>{tweet.username}</Card.Title>
+                    <Card.Text>{tweet.text}</Card.Text>
+                  </Col>
+                </Row>
+              </Card.Body>
+            </Card>
           ))}
-        </ul>
+        </>
       )}
-    </>
+    </Container>
   );
 };
 

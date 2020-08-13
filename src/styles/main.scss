@@ -1,7 +1,5 @@
-$color-primary: #333;
-$background-primary: #EFEFEF;
+$theme-colors: (
+  'primary': #1DA1F2
+);
 
-:root {
-  color: $color-primary;
-  background: $background-primary;
-}
+@import '~bootstrap/scss/bootstrap';
