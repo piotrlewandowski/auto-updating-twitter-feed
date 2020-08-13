@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Container, Jumbotron, Card, Row, Col, Figure } from 'react-bootstrap';
+import { Container, Jumbotron } from 'react-bootstrap';
 
 import { useInterval } from '../hooks/useInterval';
+import { TwitterCard } from './TwitterCard';
 
 const TwitterFeed = () => {
   /** CONSTANTS */
@@ -35,30 +36,15 @@ const TwitterFeed = () => {
       </Jumbotron>
       {data.length > 0 && (
         <>
-          {data.map(tweet => (
-            <Card
-              key={tweet.id}
-              border="primary"
-              className="mb-2"
-            >
-              <Card.Body>
-                <Row>
-                  <Col md="auto">
-                    <Figure>
-                      <Figure.Image
-                        alt={tweet.username}
-                        src={tweet.image}
-                      />
-                    </Figure>
-                  </Col>
-                  <Col>
-                    <Card.Title>{tweet.username}</Card.Title>
-                    <Card.Text>{tweet.text}</Card.Text>
-                  </Col>
-                </Row>
-              </Card.Body>
-            </Card>
-          ))}
+          {data.map(tweet => {
+            const { id, ...restProps } = tweet;
+
+            return (
+              <div key={id}>tweet
+                <TwitterCard {...restProps} />
+              </div>
+            )
+          })}
         </>
       )}
     </Container>
