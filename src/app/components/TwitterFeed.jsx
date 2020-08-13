@@ -10,17 +10,17 @@ const TwitterFeed = () => {
   const API_URL = 'http://magiclab-twitter-interview.herokuapp.com/piotr-lewandowski';
 
   /** STATE */
-  const [data, setData] = useState([]);
+  const [tweets, setTweets] = useState([]);
   const [newestTweetId, setNewestTweetId] = useState(0);
 
   useInterval(() => {
     const fetchData = async () => {
       try {
         const response = await axios(`${API_URL}/api?afterId=${newestTweetId}`);
-        const tweets = response.data;
+        const newTweets = response.data;
 
-        setNewestTweetId([...tweets].shift().id);
-        setData(data => tweets.concat(data));
+        setNewestTweetId([...newTweets].shift().id);
+        setTweets(tweets => newTweets.concat(tweets));
       } catch (error) {
         console.error('Error:', error.message);
       }
@@ -34,9 +34,9 @@ const TwitterFeed = () => {
       <Jumbotron>
         <h1>Auto updating Twitter feed</h1>
       </Jumbotron>
-      {data.length > 0 && (
+      {tweets.length > 0 && (
         <>
-          {data.map(tweet => {
+          {tweets.map(tweet => {
             const { id, ...restProps } = tweet;
 
             return (
