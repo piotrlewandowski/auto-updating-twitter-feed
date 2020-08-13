@@ -8,6 +8,7 @@ import { TwitterCard } from './TwitterCard';
 const TwitterFeed = () => {
   /** CONSTANTS */
   const API_URL = 'http://magiclab-twitter-interview.herokuapp.com/piotr-lewandowski';
+  const TWEETS_MAXIMUM = 200;
 
   /** STATE */
   const [tweets, setTweets] = useState([]);
@@ -20,7 +21,13 @@ const TwitterFeed = () => {
         const newTweets = response.data;
 
         setNewestTweetId([...newTweets].shift().id);
-        setTweets(tweets => newTweets.concat(tweets));
+
+        let joinedTweets = newTweets.concat(tweets);
+        if (joinedTweets.length >= TWEETS_MAXIMUM) {
+          joinedTweets = joinedTweets.slice(0, TWEETS_MAXIMUM);
+        }
+
+        setTweets(joinedTweets);
       } catch (error) {
         console.error('Error:', error.message);
       }
