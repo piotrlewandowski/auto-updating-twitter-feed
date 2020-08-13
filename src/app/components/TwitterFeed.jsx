@@ -14,8 +14,9 @@ const TwitterFeed = () => {
     const fetchData = async () => {
       try {
         const response = await axios(`${API_URL}/api`);
+        const tweets = response.data;
 
-        setData(response.data);
+        setData(data => tweets.concat(data));
       } catch (error) {
         console.error('Error:', error.message);
       }
