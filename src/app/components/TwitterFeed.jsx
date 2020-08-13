@@ -9,13 +9,15 @@ const TwitterFeed = () => {
 
   /** STATE */
   const [data, setData] = useState([]);
+  const [newestTweetId, setNewestTweetId] = useState(0);
 
   useInterval(() => {
     const fetchData = async () => {
       try {
-        const response = await axios(`${API_URL}/api`);
+        const response = await axios(`${API_URL}/api?afterId=${newestTweetId}`);
         const tweets = response.data;
 
+        setNewestTweetId([...tweets].shift().id);
         setData(data => tweets.concat(data));
       } catch (error) {
         console.error('Error:', error.message);
