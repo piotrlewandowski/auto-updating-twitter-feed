@@ -1,9 +1,11 @@
 import React from 'react';
 
+import { TwitterFeed } from './components/TwitterFeed';
+
 const App = () => {
   return (
     <>
-      <h1>Auto updating Twitter feed</h1>
+      <TwitterFeed />
     </>
   );
 };

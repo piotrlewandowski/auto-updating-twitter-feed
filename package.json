@@ -26,6 +26,7 @@
   "homepage": "https://github.com/piotrlewandowski/auto-updating-twitter-feed#readme",
   "dependencies": {
     "@babel/runtime": "^7.11.2",
+    "axios": "^0.19.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
